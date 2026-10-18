@@ -1,0 +1,99 @@
+{
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/share/man",
+    "*.a",
+    "*.la",
+    "/bin/setuptools-scm",
+    "/bin/vcs-versioning",
+    "/bin/borgfs",
+    "/lib/python3.*/site-packages/setuptools_scm*",
+    "/lib/python3.*/site-packages/vcs_versioning*",
+    "/lib/python3.*/site-packages/pkgconfig*"
+  ],
+  "command": "backtrack-gtk",
+  "finish-args": [
+    "--filesystem=host",
+    "--filesystem=~/.var/app",
+    "--share=network",
+    "--socket=ssh-auth",
+    "--talk-name=org.gtk.vfs.*",
+    "--filesystem=xdg-run/gvfs",
+    "--filesystem=xdg-run/gvfsd",
+    "--talk-name=org.freedesktop.Notifications",
+    "--talk-name=org.freedesktop.secrets",
+    "--talk-name=org.kde.StatusNotifierWatcher",
+    "--system-talk-name=org.freedesktop.UPower",
+    "--system-talk-name=org.freedesktop.NetworkManager",
+    "--socket=wayland",
+    "--socket=fallback-x11",
+    "--share=ipc",
+    "--device=dri"
+  ],
+  "id": "tools.backtrack.Backtrack",
+  "modules": [
+    "python3-requirements.json",
+    {
+      "build-commands": [
+        "./configure --prefix=/app --disable-documentation --disable-convert --disable-python --disable-lzo --disable-libudev --disable-zoned --disable-backtrace",
+        "make -j${FLATPAK_BUILDER_N_JOBS} btrfs",
+        "install -Dm755 btrfs /app/bin/btrfs"
+      ],
+      "buildsystem": "simple",
+      "name": "btrfs-progs",
+      "sources": [
+        {
+          "sha256": "d1f55cc2971398c9142eaa79d203e63d586a3b4b867f956664a1d68322cd4e34",
+          "type": "archive",
+          "url": "https://mirrors.edge.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v7.1.tar.xz"
+        },
+        {
+          "path": "tools.backtrack.Backtrack.metainfo.xml",
+          "type": "file"
+        }
+      ]
+    },
+    {
+      "build-commands": [
+        "cargo build --release --locked --offline -p backtrackd -p backtrack-gtk -p backtrack-cli",
+        "install -Dm755 -t /app/bin target/release/backtrackd target/release/backtrack-gtk target/release/backtrack-tray target/release/backtrack",
+        "install -Dm644 -t /app/share/applications packaging/desktop/tools.backtrack.Backtrack.desktop",
+        "install -Dm644 -t /app/share/metainfo packaging/tools.backtrack.Backtrack.metainfo.xml",
+        "install -Dm644 -t /app/share/icons/hicolor/scalable/apps packaging/icons/hicolor/scalable/apps/tools.backtrack.Backtrack.svg",
+        "install -Dm644 -t /app/share/icons/hicolor/symbolic/apps packaging/icons/hicolor/symbolic/apps/tools.backtrack.Backtrack-symbolic.svg",
+        "install -Dm644 -t /app/share/dbus-1/services packaging/flatpak/tools.backtrack.Backtrack.Daemon1.service",
+        "sed 's|^Exec=/usr/bin/|Exec=/app/bin/|' packaging/dbus/tools.backtrack.Backtrack.service > /app/share/dbus-1/services/tools.backtrack.Backtrack.service"
+      ],
+      "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "env": {
+          "CARGO_HOME": "/run/build/backtrack/cargo",
+          "CARGO_NET_OFFLINE": "true"
+        }
+      },
+      "buildsystem": "simple",
+      "name": "backtrack",
+      "sources": [
+        {
+          "commit": "e00db0abc21c03d818cc7f7d9e5f944d21f3d9c8",
+          "tag": "v0.1.0-rc3",
+          "type": "git",
+          "url": "https://github.com/keithvassallomt/backtrack.git"
+        },
+        {
+          "dest": "packaging",
+          "path": "tools.backtrack.Backtrack.metainfo.xml",
+          "type": "file"
+        },
+        "cargo-sources.json"
+      ]
+    }
+  ],
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "51",
+  "sdk": "org.gnome.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ]
+}
