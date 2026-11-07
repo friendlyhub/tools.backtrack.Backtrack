@@ -16,6 +16,8 @@
   "finish-args": [
     "--filesystem=host",
     "--filesystem=~/.var/app",
+    "--filesystem=~/.local/share/flatpak/app/tools.backtrack.Backtrack:ro",
+    "--filesystem=/var/lib/flatpak/app/tools.backtrack.Backtrack:ro",
     "--share=network",
     "--socket=ssh-auth",
     "--talk-name=org.gtk.vfs.*",
@@ -24,6 +26,7 @@
     "--talk-name=org.freedesktop.Notifications",
     "--talk-name=org.freedesktop.secrets",
     "--talk-name=org.kde.StatusNotifierWatcher",
+    "--talk-name=org.kde.plasmashell",
     "--system-talk-name=org.freedesktop.UPower",
     "--system-talk-name=org.freedesktop.NetworkManager",
     "--socket=wayland",
@@ -58,10 +61,12 @@
       "build-commands": [
         "cargo build --release --locked --offline -p backtrackd -p backtrack-gtk -p backtrack-cli",
         "install -Dm755 -t /app/bin target/release/backtrackd target/release/backtrack-gtk target/release/backtrack-tray target/release/backtrack",
+        "install -Dm755 -t /app/share/backtrack packaging/snapper/backtrack-snapper-setup",
         "install -Dm644 -t /app/share/applications packaging/desktop/tools.backtrack.Backtrack.desktop",
         "install -Dm644 -t /app/share/metainfo packaging/tools.backtrack.Backtrack.metainfo.xml",
         "install -Dm644 -t /app/share/icons/hicolor/scalable/apps packaging/icons/hicolor/scalable/apps/tools.backtrack.Backtrack.svg",
-        "install -Dm644 -t /app/share/icons/hicolor/symbolic/apps packaging/icons/hicolor/symbolic/apps/tools.backtrack.Backtrack-symbolic.svg",
+        "install -Dm644 -t /app/share/icons/hicolor/symbolic/apps packaging/icons/hicolor/symbolic/apps/tools.backtrack.Backtrack-symbolic.svg packaging/icons/hicolor/symbolic/apps/tools.backtrack.Backtrack-tray-symbolic.svg",
+        "install -Dm644 -t /app/share/icons/hicolor/symbolic/actions packaging/icons/hicolor/symbolic/actions/tools.backtrack.Backtrack-rewind-symbolic.svg",
         "install -Dm644 -t /app/share/dbus-1/services packaging/flatpak/tools.backtrack.Backtrack.Daemon1.service",
         "sed 's|^Exec=/usr/bin/|Exec=/app/bin/|' packaging/dbus/tools.backtrack.Backtrack.service > /app/share/dbus-1/services/tools.backtrack.Backtrack.service"
       ],
@@ -76,8 +81,8 @@
       "name": "backtrack",
       "sources": [
         {
-          "commit": "984ec07299ca11ff5198ff029cc7ec8305b0748d",
-          "tag": "v0.1.0-rc4",
+          "commit": "80f7e6cbbd1e9930f6fe983ba56f31880f8857ed",
+          "tag": "v0.1.0",
           "type": "git",
           "url": "https://github.com/keithvassallomt/backtrack.git"
         },
