@@ -62,19 +62,48 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/keithvassallomt/backtrack/main/backtrack_plan/screenshots/stage-06-main-window-light.png</image>
+      <image>https://backtrack.tools/screenshots/window.png</image>
       <caption>A folder as it was at an earlier backup</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/keithvassallomt/backtrack/main/backtrack_plan/screenshots/stage-06-main-window-dark.png</image>
+      <image>https://backtrack.tools/screenshots/window-dark.png</image>
       <caption>The same window in the dark style</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/keithvassallomt/backtrack/main/backtrack_plan/screenshots/stage-12-nautilus-file-menu.png</image>
-      <caption>Restore Previous Version from the file manager</caption>
+      <image>https://backtrack.tools/screenshots/rewind.png</image>
+      <caption>Rewind: a folder, with its backups stretching away behind it</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://backtrack.tools/screenshots/restore.png</image>
+      <caption>Before a restore replaces a file, it shows both dates</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://backtrack.tools/screenshots/search.png</image>
+      <caption>Search finds files that are no longer on your computer</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://backtrack.tools/screenshots/file-manager.png</image>
+      <caption>Backtrack's items in the file manager's menu</caption>
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.1.1" date="2026-11-08">
+      <description>
+        <p>Changed</p>
+        <ul>
+          <li>How to Install… and the links to the Snapper guide in Preferences now open the guides on backtrack.tools, at the same section, instead of their Markdown files on GitHub.</li>
+          <li>Software centres such as GNOME Software and Discover now show screenshots of this version: the window in its light and dark styles, Rewind, a restore, search, and Backtrack's items in the file manager. They are served from backtrack.tools.</li>
+        </ul>
+        <p>Fixed</p>
+        <ul>
+          <li>Backups that need no passphrase now open from Already have backups? without one: Vorta's unencrypted backups, and Pika Backup's made with Continue Unencrypted. The wizard used to stop at "Something went wrong".</li>
+          <li>When Backtrack carries on backing up into backups another program made, such as Vorta or Pika Backup, thinning out older backups no longer removes some of that program's. Backtrack now thins out only its own.</li>
+          <li>Backups whose key is kept in a file of its own, as Vorta's key-file encryption keeps it, now open from the wizard once you choose that file. The wizard used to stop at "Something went wrong".</li>
+          <li>Rewind opened from the file manager, the launcher or the tray now shows as part of Backtrack, with its name and icon, in GNOME's window switcher and overview. It used to appear there as a separate application with neither.</li>
+          <li>Before the first backup has run, <code>backtrack status</code> no longer says your files are backed up: it says the first backup hasn't run yet, and the window's status line says when it is due.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-11-07">
       <description>
         <p>Added</p>
