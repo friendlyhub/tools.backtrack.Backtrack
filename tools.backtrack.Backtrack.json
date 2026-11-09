@@ -81,8 +81,8 @@
       "name": "backtrack",
       "sources": [
         {
-          "commit": "c59d1d17718b8b7409a70a3be81e7e2e4057ba08",
-          "tag": "v0.1.1",
+          "commit": "b11ed9964ac10381fa41074d23b8f7430ac7dfd6",
+          "tag": "v0.1.2",
           "type": "git",
           "url": "https://github.com/keithvassallomt/backtrack.git"
         },
