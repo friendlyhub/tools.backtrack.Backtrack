@@ -87,6 +87,18 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.1.2" date="2026-11-09">
+      <description>
+        <p>Fixed</p>
+        <ul>
+          <li>Screen readers now read out the Install and How to Install… buttons in Preferences by their own names. They used to announce them by the file manager's name, such as GNOME Files (Nautilus), so the buttons sounded the same as the row they sit in.</li>
+        </ul>
+        <p>Security</p>
+        <ul>
+          <li>The SQLite library built into Backtrack is updated to a version with the fix for CVE-2026-119375 (RUSTSEC-2026-0459).</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2026-11-08">
       <description>
         <p>Changed</p>
