@@ -87,6 +87,14 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="0.1.3" date="2026-11-15">
+      <description>
+        <p>Fixed</p>
+        <ul>
+          <li>In Rewind, a folder opened inside a folder you have just opened now opens. It used to say "No such file or directory", because Rewind went on looking inside the folder you had come from.</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.2" date="2026-11-09">
       <description>
         <p>Fixed</p>
