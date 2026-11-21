@@ -29,6 +29,7 @@
     "--talk-name=org.kde.plasmashell",
     "--system-talk-name=org.freedesktop.UPower",
     "--system-talk-name=org.freedesktop.NetworkManager",
+    "--system-talk-name=org.freedesktop.login1",
     "--socket=wayland",
     "--socket=fallback-x11",
     "--share=ipc",
@@ -81,8 +82,8 @@
       "name": "backtrack",
       "sources": [
         {
-          "commit": "47fb8e473cdaa8930b8c04dd715884ae942f7b20",
-          "tag": "v0.1.3",
+          "commit": "07eb205c8a94935ccdac121aae88f9afd1abc432",
+          "tag": "v0.1.4",
           "type": "git",
           "url": "https://github.com/keithvassallomt/backtrack.git"
         },
